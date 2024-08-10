@@ -3,17 +3,18 @@ import constants from "../interface/constant"
 import { showInstruction } from "../src/instructionList"
 import { createIngredientsList } from "../src/ingredientsList"
 
-export const setDomDocument =  (recipeData: arrRecipe) : void => { 
+export const setDomDocument =  (recipeData: arrRecipe[]) : void => { 
     if(recipeData){
+        console.log(recipeData);
         if(constants.recipeImg){
-            constants.recipeImg.src = recipeData.strMealThumb;
+            constants.recipeImg.src = recipeData[0].strMealThumb;
             constants.recipeImg.style.width = "200px";
             constants.recipeImg.style.paddingLeft = "100px";
         }
 
         if(constants.recipeTitle)
         {
-            constants.recipeTitle.innerHTML = recipeData.strMeal;
+            constants.recipeTitle.innerHTML = recipeData[0].strMeal;
             constants.recipeTitle.style.textAlign = 'left';
         }
 
@@ -21,10 +22,10 @@ export const setDomDocument =  (recipeData: arrRecipe) : void => {
             constants.recipeBtn.style.visibility = "hidden";
         }
         if(constants.recipeTags){
-            constants.recipeTags.innerHTML = recipeData.strYoutube ? recipeData.strYoutube : '';
+            constants.recipeTags.innerHTML = recipeData[0].strYoutube ? recipeData[0].strYoutube : '';
             constants.recipeTags.style.textAlign = 'left';
         }
-        createIngredientsList(recipeData);
-        showInstruction(recipeData.strInstructions);
+        createIngredientsList(recipeData[0]);
+        showInstruction(recipeData[0].strInstructions);
     }   
 }

@@ -1,24 +1,36 @@
 import {paramFetchData} from "../interface/stringParam"
-import {arrRecipeModel} from "../interface/recipeModel"
+import {arrRecipeModel, arrRecipe} from "../interface/recipeModel"
 
-export const getDataMeal = async({ urlEndpoint, method } : paramFetchData ) : Promise<arrRecipeModel> => {
+export const getDataMeal = async({ urlEndpoint, method } : paramFetchData ) : Promise<arrRecipe[]> => {
     try
     {
-        const response = await fetch(urlEndpoint,
+    
+            const response = await fetch(urlEndpoint,
+                {
+                    method : method ?? 'GET'
+                }
+            );
+            if(!response.ok)
             {
-                method : method ?? 'GET'
+                throw new Error("Could not fetch resource");
             }
-        );
-        if(!response.ok)
-        {
-            throw new Error("Could not fetch resource");
-        }
-        //convert to json
-        let data : arrRecipeModel = await response.json();
-        return data;
+    
+            //convert to json
+            let data : arrRecipeModel = await response.json();
+            let datas : arrRecipe[] = data.meals;
+           
+            return datas;
+        
+       
     }
-    catch(error)
+    catch (error: unknown) 
     {   
-        throw error;
+        if (error instanceof Error) {
+            alert(error.message);
+        } else {
+            alert('An unknown error occurred');
+        }
+        return [];	
     }
+
 }

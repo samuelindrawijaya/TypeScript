@@ -13,7 +13,7 @@ const btnGetRecipe = document.getElementById('getRecipeBtn');
 btnGetRecipe?.addEventListener("click", () =>{
     getDataMeal(params)
     .then(function(data){
-        const mealData : arrRecipe | null = data.meals[0];
+        const mealData : arrRecipe[] | null = data;
         setDomDocument(mealData);
 
     })

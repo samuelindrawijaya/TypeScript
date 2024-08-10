@@ -1,5 +1,4 @@
-import {arrRecipe} from "../interface/recipeModel"
-import constants from "../interface/constant"
+
 
 export const showInstruction =  (instructionList : string) : void => { 
     const getContainer = document.getElementById('recipeContainer') as HTMLDivElement;
